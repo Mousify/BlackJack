@@ -1,0 +1,210 @@
+C:\Users\majus\OneDrive\Stalinis kompiuteris\CasinoCode\
+│   .env.local
+│   .gitignore
+│   components.json
+│   folder_structure.txt
+│   middleware.ts
+│   next-env.d.ts
+│   next.config.mjs
+│   package-lock.json
+│   package.json
+│   pnpm-lock.yaml
+│   postcss.config.mjs
+│   structure.txt
+│   tailwind.config.ts
+│   tsconfig.json
+│
+├───app
+│   │   globals.css
+│   │   layout.tsx
+│   │   page.tsx
+│   │   providers.tsx
+│   │
+│   ├───achievements
+│   │       page.tsx
+│   │
+│   ├───auth
+│   │   ├───callback
+│   │   │       route.ts
+│   │   │
+│   │   ├───signin
+│   │   │       loading.tsx
+│   │   │       page.tsx
+│   │   │
+│   │   └───signup
+│   │           page.tsx
+│   │
+│   ├───multiplayer
+│   │   │   loading.tsx
+│   │   │   page.tsx
+│   │   │
+│   │   └───room
+│   │       └───[id]
+│   │               page.tsx
+│   │
+│   ├───play
+│   │       page.tsx
+│   │
+│   ├───profile
+│   │       page.tsx
+│   │
+│   ├───settings
+│   │       page.tsx
+│   │
+│   └───shop
+│           page.tsx
+│
+├───components
+│   │   audio-initializer.tsx
+│   │   auth-sync-provider.tsx
+│   │   back-button.tsx
+│   │   browser-feature-check.tsx
+│   │   chip.tsx
+│   │   enhanced-game-board.tsx
+│   │   error-boundary.tsx
+│   │   fallback-image.tsx
+│   │   game-board.tsx
+│   │   game-stats.tsx
+│   │   mobile-nav.tsx
+│   │   orientation-handler.tsx
+│   │   playing-card.tsx
+│   │   protected-route.tsx
+│   │   resource-preloader.tsx
+│   │   sound-toggle.tsx
+│   │   theme-provider-fixed.tsx
+│   │   theme-provider.tsx
+│   │   touch-feedback.tsx
+│   │   tutorial-modal.tsx
+│   │
+│   └───ui
+│           accordion.tsx
+│           alert-dialog.tsx
+│           alert.tsx
+│           aspect-ratio.tsx
+│           avatar.tsx
+│           background-image.tsx
+│           badge.tsx
+│           breadcrumb.tsx
+│           button.tsx
+│           calendar.tsx
+│           card.tsx
+│           carousel.tsx
+│           chart.tsx
+│           checkbox.tsx
+│           collapsible.tsx
+│           command.tsx
+│           context-menu.tsx
+│           dialog.tsx
+│           drawer.tsx
+│           dropdown-menu.tsx
+│           form.tsx
+│           hover-card.tsx
+│           input-otp.tsx
+│           input.tsx
+│           label.tsx
+│           menubar.tsx
+│           navigation-menu.tsx
+│           pagination.tsx
+│           popover.tsx
+│           progress.tsx
+│           radio-group.tsx
+│           resizable.tsx
+│           scroll-area.tsx
+│           select.tsx
+│           separator.tsx
+│           sheet.tsx
+│           sidebar.tsx
+│           skeleton.tsx
+│           slider.tsx
+│           sonner.tsx
+│           switch.tsx
+│           table.tsx
+│           tabs.tsx
+│           textarea.tsx
+│           toast.tsx
+│           toaster.tsx
+│           toggle-group.tsx
+│           toggle.tsx
+│           tooltip.tsx
+│           use-mobile.tsx
+│           use-toast.ts
+│
+├───contexts
+│       auth-context.tsx
+│       game-context.tsx
+│       multiplayer-context.tsx
+│       music-context.tsx
+│
+├───hooks
+│       use-auth-sync.tsx
+│       use-mobile.tsx
+│       use-toast.ts
+│
+├───lib
+│   │   sounds.tsx
+│   │   utils.ts
+│   │
+│   └───supabase
+│           client.ts
+│           server.ts
+│
+├───public
+│   │   placeholder-logo.png
+│   │   placeholder-logo.svg
+│   │   placeholder-user.jpg
+│   │   placeholder.jpg
+│   │   placeholder.svg
+│   │
+│   ├───images
+│   │       blackjack-master.png
+│   │       casino-background.png
+│   │       chip-1.png
+│   │       chip-100.png
+│   │       chip-25.png
+│   │       chip-5.png
+│   │       chip-500.png
+│   │       comeback-king.png
+│   │       dealer-avatar.png
+│   │       first-win.png
+│   │       high-roller.png
+│   │       logo.png
+│   │       lucky-streak.png
+│   │       player-avatar.png
+│   │
+│   └───sounds
+│           button-click.mp3
+│           card-deal.mp3
+│           card-flip.mp3
+│           chip-single.mp3
+│           chip-stack.mp3
+│           dealer-blackjack.mp3
+│           dealer-bust.mp3
+│           dealer-hit.mp3
+│           dealer-stand.mp3
+│           dealer-welcome.mp3
+│           game-music-1.mp3
+│           game-music-2.mp3
+│           high-stakes.mp3
+│           lose.mp3
+│           main-theme.mp3
+│           push.mp3
+│           victory-theme.mp3
+│           win.mp3
+│
+├───styles
+│       globals.css
+│
+├───supabase
+│   ├───functions
+│   │       get_rooms_with_player_count.sql
+│   │       handle_new_user.sql
+│   │       updated_handle_new_user.sql
+│   │
+│   └───policies
+│           game_stats_policies.sql
+│           profiles_policies.sql
+│           transactions_policies.sql
+│           updated_profiles_policies.sql
+│
+└───types
+        supabase.ts
