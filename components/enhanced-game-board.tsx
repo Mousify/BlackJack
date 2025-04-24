@@ -30,7 +30,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
-import { GameStats } from "./game-stats";
+// GameStats now handled directly in this component
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/components/auth-provider";
 
@@ -898,7 +898,7 @@ export default function BlackjackGame() {
 
     // Calculate position (left side, bottom area)
     const targetX = windowWidth * 0.15; // 15% from the left edge
-    const targetY = windowHeight * 0.75; // 75% from the top (near bottom)
+    const targetY = windowHeight * 0.65; // 65% from the top (adjusted for better visibility)
 
     // Get chip position for animation start
     const chipRect = (event.target as HTMLElement).getBoundingClientRect();
@@ -952,7 +952,7 @@ export default function BlackjackGame() {
 
     // Calculate position (left side, bottom area)
     const targetX = windowWidth * 0.15; // 15% from the left edge
-    const targetY = windowHeight * 0.75; // 75% from the top (near bottom)
+    const targetY = windowHeight * 0.65; // 65% from the top (adjusted for better visibility)
 
     // Add chips with slight delay between them
     chipsToAdd.forEach((value, index) => {
@@ -1139,6 +1139,7 @@ export default function BlackjackGame() {
                 suit={card.suit}
                 rank={card.rank}
                 hidden={card.hidden}
+                className={card.hidden ? "h-[96px]" : ""}
               />
             </div>
           ))}
@@ -1196,7 +1197,7 @@ export default function BlackjackGame() {
   // Render betting chips
   const renderBettingChips = () => {
     return (
-      <div className="flex justify-center gap-3 my-6" ref={chipStackRef}>
+      <div className="flex justify-center gap-3 my-4" ref={chipStackRef}>
         {CHIP_VALUES.map((value) => (
           <div
             key={`chip-${value}`}
@@ -1251,7 +1252,7 @@ export default function BlackjackGame() {
   const renderGameControls = () => {
     if (gameState === "betting") {
       return (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-3">
           {renderBettingChips()}
 
           <div className="flex justify-between gap-2">
@@ -1290,7 +1291,7 @@ export default function BlackjackGame() {
         balance >= bet;
 
       return (
-        <div className="grid grid-cols-2 gap-2 mt-4">
+        <div className="grid grid-cols-2 gap-2 mt-3">
           <Button
             variant="default"
             onClick={handleHit}
@@ -1348,7 +1349,7 @@ export default function BlackjackGame() {
 
     if (gameState === "gameOver") {
       return (
-        <div className="flex justify-center mt-4">
+        <div className="flex justify-center mt-3">
           <Button
             variant="default"
             onClick={startNewRound}
@@ -1498,14 +1499,14 @@ export default function BlackjackGame() {
       {renderBetChips()}
 
       <div
-        className="min-h-screen flex flex-col relative"
+        className="h-full flex flex-col"
         style={{
           backgroundImage: "linear-gradient(to bottom, #1a472a, #0d5522)",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
-        <header className="flex justify-between items-center p-4">
+        <header className="flex justify-between items-center p-3">
           <Button
             variant="outline"
             size="sm"
@@ -1516,12 +1517,17 @@ export default function BlackjackGame() {
           </Button>
 
           <div className="flex items-center gap-2">
-            <GameStats
-              balance={balance}
-              bet={bet}
-              handsPlayed={handsPlayed}
-              streak={streak}
-            />
+            <div className="bg-black/50 text-white border border-yellow-500/50 rounded-md px-2 py-1 flex items-center">
+              <Coins className="h-4 w-4 text-yellow-500 mr-1" />
+              <span>{balance}</span>
+            </div>
+
+            {streak > 0 && (
+              <div className="bg-black/50 text-white border border-yellow-500/50 rounded-md px-2 py-1 flex items-center">
+                <Trophy className="h-4 w-4 text-yellow-500 mr-1" />
+                <span>{streak}</span>
+              </div>
+            )}
 
             <Button
               variant="outline"
@@ -1587,21 +1593,21 @@ export default function BlackjackGame() {
           </div>
         </header>
 
-        <main className="flex-1 flex flex-col justify-between p-4 md:p-6">
-          <div className="mb-6 md:mb-8">
-            <h2 className="text-lg font-bold text-white mb-3">Dealer</h2>
+        <main className="flex-1 flex flex-col justify-between p-3 pt-6">
+          <div className="mb-3 mt-5">
+            <h2 className="text-lg font-bold text-white mb-2">Dealer</h2>
             {renderDealerCards()}
           </div>
 
           {renderInsurancePrompt()}
           {renderGameResult()}
 
-          <div className="mb-6 md:mb-8">
-            <h2 className="text-lg font-bold text-white mb-3">Player</h2>
+          <div className="mb-3">
+            <h2 className="text-lg font-bold text-white mb-2">Player</h2>
             {renderPlayerCards()}
             {splitHand.length > 0 && (
-              <div className="mt-6">
-                <h3 className="text-lg font-bold text-white mb-3">
+              <div className="mt-3">
+                <h3 className="text-lg font-bold text-white mb-2">
                   Split Hand
                 </h3>
                 {renderSplitCards()}
@@ -1609,15 +1615,19 @@ export default function BlackjackGame() {
             )}
           </div>
 
-          <div
-            ref={betAreaRef}
-            className="flex justify-start items-center mb-6 h-24 relative"
-          >
-            {bet > 0 && gameState === "betting" && (
-              <div className="bg-green-900/30 border border-yellow-500/30 rounded-full px-6 py-3 absolute left-[15%] bottom-0 transform -translate-x-1/2 z-0">
-                <span className="text-yellow-500 font-bold text-xl">{bet}</span>
-              </div>
-            )}
+          <div className="flex-grow flex items-center justify-center">
+            <div
+              ref={betAreaRef}
+              className="flex justify-start items-center h-16 relative w-full"
+            >
+              {bet > 0 && gameState === "betting" && (
+                <div className="bg-green-900/30 border border-yellow-500/30 rounded-full px-6 py-3 absolute left-[15%] bottom-0 transform -translate-x-1/2 z-0">
+                  <span className="text-yellow-500 font-bold text-xl">
+                    {bet}
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="mt-auto">{renderGameControls()}</div>
